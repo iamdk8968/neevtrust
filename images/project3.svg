@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#F1F8E9" />
+  
+  <!-- Healthcare Camp Illustration -->
+  <!-- Medical Tent -->
+  <path d="M100 200 L200 100 L300 200 Z" fill="#FFFFFF" stroke="#4CAF50" stroke-width="3" />
+  <rect x="100" y="200" width="200" height="50" fill="#FFFFFF" stroke="#4CAF50" stroke-width="3" />
+  
+  <!-- Red Cross Symbol -->
+  <rect x="190" y="130" width="20" height="60" fill="#F44336" />
+  <rect x="170" y="150" width="60" height="20" fill="#F44336" />
+  
+  <!-- Medical Staff -->
+  <!-- Doctor -->
+  <circle cx="150" cy="180" r="20" fill="#4CAF50" />
+  <rect x="145" y="200" width="10" height="30" fill="#388E3C" />
+  <rect x="130" y="210" width="40" height="10" fill="#FFFFFF" />
+  
+  <!-- Patient -->
+  <circle cx="250" cy="180" r="20" fill="#8BC34A" />
+  <rect x="245" y="200" width="10" height="30" fill="#689F38" />
+  
+  <!-- Medical Equipment -->
+  <rect x="120" y="230" width="30" height="15" fill="#2196F3" rx="3" />
+  <rect x="270" y="230" width="20" height="10" fill="#FF9800" rx="2" />
+  
+  <!-- Title -->
+  <rect x="50" y="260" width="300" height="30" rx="5" fill="#4CAF50" opacity="0.8" />
+  <text x="200" y="280" font-family="Arial" font-size="16" text-anchor="middle" fill="#FFFFFF">Healthcare Camps</text>
+</svg>

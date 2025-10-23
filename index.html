@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neev Trust - Empowering Communities</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Neev Trust</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#donation">Donate</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="home-section">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active" style="background-image: url('images/banner.jpg');">
+                    <div class="home-content">
+                        <h1>Welcome to Neev Trust</h1>
+                        <p>Building foundations for a better tomorrow through community service and empowerment</p>
+                        <a href="#donation" class="cta-button">Donate Now</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('images/banner2.jpg');">
+                    <div class="home-content">
+                        <h1>Empowering Communities</h1>
+                        <p>Creating sustainable change through education, healthcare, and livelihood initiatives</p>
+                        <a href="#gallery" class="cta-button">Our Work</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('images/banner3.jpg');">
+                    <div class="home-content">
+                        <h1>Join Our Mission</h1>
+                        <p>Together we can make a difference in the lives of those who need it most</p>
+                        <a href="#contact" class="cta-button">Get Involved</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-btn" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-dots">
+                    <span class="dot active" data-slide="0" onclick="goToSlide(0)"></span>
+                    <span class="dot" data-slide="1" onclick="goToSlide(1)"></span>
+                    <span class="dot" data-slide="2" onclick="goToSlide(2)"></span>
+                </div>
+                <button class="next-btn" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
+
+        // Auto-slide every 5 seconds
+        setInterval(() => changeSlide(1), 5000);
+    </script>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="mission-vision">
+                    <div class="mission">
+                        <h3>Our Mission</h3>
+                        <p>To create sustainable change by empowering underprivileged communities through education, healthcare, and livelihood initiatives.</p>
+                    </div>
+                    <div class="vision">
+                        <h3>Our Vision</h3>
+                        <p>A world where every individual has equal opportunities to grow, learn, and thrive regardless of their socio-economic background.</p>
+                    </div>
+                    <div class="objectives">
+                        <h3>Our Objectives</h3>
+                        <ul>
+                            <li>Provide quality education to underprivileged children</li>
+                            <li>Improve healthcare access in rural communities</li>
+                            <li>Create sustainable livelihood opportunities</li>
+                            <li>Promote environmental conservation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="founders-gallery">
+                    <h3>Our Founders</h3>
+                    <div class="founders">
+                        <div class="founder">
+                            <div class="founder-img">
+                                <img src="images/founder1.svg" alt="Founder 1">
+                            </div>
+                            <h4>Sanjay Chaurasiya</h4>
+                            <p>Social Entrepreneur with 15+ years of experience in community development projects across India.</p>
+                        </div>
+                        <div class="founder">
+                            <div class="founder-img">
+                                <img src="images/founder2.svg" alt="Founder 2">
+                            </div>
+                            <h4>Dhananjay Vishwakarma</h4>
+                            <p>Education specialist dedicated to creating innovative learning solutions for underserved communities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social work -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Our Gallery</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="images/project1.svg" alt="Food Distribution">
+                    <div class="gallery-overlay">
+                        <h3>Food Distribution</h3>
+                        <p>Providing meals to those in need</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project2.svg" alt="Education Support">
+                    <div class="gallery-overlay">
+                        <h3>Education Support</h3>
+                        <p>Empowering through knowledge</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project3.svg" alt="Healthcare Camps">
+                    <div class="gallery-overlay">
+                        <h3>Healthcare Camps</h3>
+                        <p>Medical services for all</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project4.svg" alt="Women Empowerment">
+                    <div class="gallery-overlay">
+                        <h3>Women Empowerment</h3>
+                        <p>Supporting women entrepreneurs</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project5.svg" alt="Environmental Initiatives">
+                    <div class="gallery-overlay">
+                        <h3>Environmental Initiatives</h3>
+                        <p>Creating a greener planet</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project6.svg" alt="Elder Care">
+                    <div class="gallery-overlay">
+                        <h3>Elder Care</h3>
+                        <p>Supporting our seniors</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project7.jpg" alt="Community Events">
+                    <div class="gallery-overlay">
+                        <h3>Community Events</h3>
+                        <p>Bringing people together</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/project8.jpg" alt="Volunteer Programs">
+                    <div class="gallery-overlay">
+                        <h3>Volunteer Programs</h3>
+                        <p>Making a difference together</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-modal">
+                <span class="close-modal">&times;</span>
+                <img class="modal-content" id="modal-image">
+                <div class="modal-caption"></div>
+            </div>
+        </div>
+    </section>
+<!-- Smooth Auto-Scrolling YouTube Video Section with Popup -->
+<section id="youtube-section" style="padding:50px 0; background:#f9f9f9; text-align:center;">
+  <h2 class="section-title">Watch Our Videos</h2>
+
+  <!-- Carousel Wrapper -->
+  <div class="video-carousel-wrapper" style="overflow:hidden; width:90%; margin:0 auto;">
+    <div class="video-carousel">
+      <!-- Video Thumbnails using your iframe link -->
+      <img src="https://img.youtube.com/vi/0CbFrom3Qkk/hqdefault.jpg" data-video="0CbFrom3Qkk" alt="Video 1">
+      <img src="https://img.youtube.com/vi/_F9d6lX2zrE/hqdefault.jpg" data-video="_F9d6lX2zrE" alt="Video 2">
+      <img src="https://img.youtube.com/vi/0CbFrom3Qkk/hqdefault.jpg" data-video="0CbFrom3Qkk" alt="Video 3">
+      <!-- Duplicate for seamless scroll -->
+      <img src="https://img.youtube.com/vi/_F9d6lX2zrE/hqdefault.jpg" data-video="_F9d6lX2zrE" alt="Video 4">
+      <img src="https://img.youtube.com/vi/_F9d6lX2zrE/hqdefault.jpg" data-video="_F9d6lX2zrE" alt="Video 5">
+      <img src="https://img.youtube.com/vi/_F9d6lX2zrE/hqdefault.jpg" data-video="_F9d6lX2zrE" alt="Video 6">
+    </div>
+  </div>
+   <!-- Subscribe Button -->
+    <div class="youtube-subscribe">
+            <a href="https://www.youtube.com/@NEEVTRUST" target="_blank" class="youtube-subscribe-btn">
+                <i class="fab fa-youtube"></i> Subscribe to Our Channel
+            </a>
+        </div>
+    </div>
+  </a>
+</section>
+
+<!-- Video Popup -->
+<div id="video-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">
+  <div style="position:relative; width:80%; max-width:800px;">
+    <span id="close-popup" style="position:absolute; top:-20px; right:-20px; font-size:30px; color:#fff; cursor:pointer;">&times;</span>
+    <iframe id="popup-video" width="100%" height="450" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</div>
+ 
+</section>
+
+    <!-- Donation Section -->
+    <section id="donation" class="donation-section">
+        <div class="container">
+            <h2 class="section-title">Support Our Cause</h2>
+            <div class="donation-content">
+                <div class="payment-info">
+                    <h3>Bank Details</h3>
+                    <ul class="bank-details">
+                        <li><strong>Bank Name:</strong> Canara Bank</li>
+                        <li><strong>Account Name:</strong> Neev Trust</li>
+                        <li><strong>Account No:</strong> 120030500918</li>
+                        <li><strong>IFSC:</strong> CNRB0005252</li>
+                        <li><strong>UPI ID:</strong> 326553731500918@cnrb</li>
+                    </ul>
+                </div>
+                <div class="qr-code">
+                    <img src="images/qr-code.svg" alt="Donation QR Code">
+                    <p>Scan to donate</p>
+                </div>
+            </div>
+            <a href="#contact" class="cta-button animate-scroll">Contribute Now</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Gorakhnath Rd, Rajendra Nagar, Gorakhpur, Uttar Pradesh 273015</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+91 9140044178</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@neevtrust.org</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/9140044178" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Neev Trust</h2>
+                    <p>Building Hope, One Life at a Time</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#our-work">Our Work</a></li>
+                        <li><a href="#get-involved">Get Involved</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Neev Trust 2025 | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+    <!-- JS -->
+<script>
+const popup = document.getElementById('video-popup');
+const popupVideo = document.getElementById('popup-video');
+const closeBtn = document.getElementById('close-popup');
+
+document.querySelectorAll('.video-carousel img').forEach(img => {
+  img.addEventListener('click', () => {
+    const videoId = img.getAttribute('data-video');
+    popupVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    popup.style.display = 'flex';
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  popupVideo.src = '';
+  popup.style.display = 'none';
+});
+
+popup.addEventListener('click', (e) => {
+  if(e.target === popup) {
+    popupVideo.src = '';
+    popup.style.display = 'none';
+  }
+});
+</script>

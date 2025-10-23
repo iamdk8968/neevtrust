@@ -29,32 +29,28 @@ body.dark-mode {
     --border-color: #444;
 }
 
+/* (Baaki ke global styles wैसे hi rahenge) */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html {
     scroll-behavior: smooth;
 }
-
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
-    /* Smooth transition for theme change */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 0;
 }
-
 .section-title {
     text-align: center;
     color: var(--text-dark);
@@ -63,7 +59,6 @@ body {
     position: relative;
     padding-bottom: 1rem;
 }
-
 .section-title::after {
     content: '';
     position: absolute;
@@ -75,8 +70,6 @@ body {
     background-color: var(--primary-color);
     border-radius: 2px;
 }
-
-/* Card style (About, Founder, etc.) */
 .card {
     background-color: var(--card-bg);
     padding: 1.5rem;
@@ -84,9 +77,6 @@ body {
     box-shadow: var(--shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-
-/* ===== BUTTONS ===== */
 .cta-button {
     display: inline-block;
     background-color: var(--primary-color);
@@ -99,7 +89,6 @@ body {
     box-shadow: var(--shadow);
     border: 2px solid var(--primary-color);
 }
-
 .cta-button:hover {
     background-color: var(--white);
     color: var(--primary-color);
@@ -108,58 +97,49 @@ body {
 }
 
 /* ===== HEADER & NAVIGATION ===== */
+/* (Header ke styles wैसे hi rahenge) */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--card-bg); /* Use card bg for header */
+    background-color: var(--card-bg);
     box-shadow: var(--shadow);
     z-index: 1000;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
 }
-
 .logo h1 {
     color: var(--primary-color);
     font-size: 1.8rem;
     font-weight: 700;
 }
-
 .nav-links {
     display: flex;
     list-style: none;
 }
-
 .nav-links li {
     margin-left: 2rem;
 }
-
 .nav-links a {
     text-decoration: none;
-    color: var(--text-color); /* Use theme text color */
+    color: var(--text-color);
     font-weight: 500;
     transition: color 0.3s ease;
 }
-
 .nav-links a:hover {
     color: var(--primary-color);
 }
-
-/* Nav controls (Toggle + Hamburger) */
 .nav-controls {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
-
-/* --- Dark/Light Mode Toggle Button --- */
 .theme-toggle-btn {
     background: none;
     border: none;
@@ -170,48 +150,42 @@ header {
     line-height: 1;
 }
 .theme-toggle-btn .fa-sun {
-    display: none; /* Initially hide sun */
+    display: none;
 }
 .theme-toggle-btn .fa-moon {
-    display: inline-block; /* Initially show moon */
+    display: inline-block;
 }
-/* Show sun icon in dark mode */
 body.dark-mode .theme-toggle-btn .fa-sun {
     display: inline-block;
 }
 body.dark-mode .theme-toggle-btn .fa-moon {
     display: none;
 }
-
-
-/* --- Hamburger Menu --- */
 .hamburger {
     display: none;
     cursor: pointer;
 }
-
 .bar {
     width: 25px;
     height: 3px;
-    background-color: var(--text-color); /* Use theme text color */
+    background-color: var(--text-color);
     margin: 5px 0;
     transition: all 0.3s ease;
 }
 
-/* ===== HOME SECTION (SLIDER) ===== */
+/* ===== HOME SECTION (SLIDER) - UPDATED ===== */
 .home-section {
-    height: 100vh;
+    height: 100vh; /* Desktop par full height */
     position: relative;
     overflow: hidden;
     color: var(--white);
+    
+    /* BADLAAV 1: Black background add kiya gaya hai */
+    /* Jab image 'contain' hogi, toh side mein black bars dikhengi */
+    background-color: #000;
 }
 
-.slider-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
+.slider-container,
 .slider {
     width: 100%;
     height: 100%;
@@ -224,15 +198,12 @@ body.dark-mode .theme-toggle-btn .fa-moon {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-blend-mode: overlay;
-    
-    /* --- SLIDER RESPONSIVENESS FIX --- */
-    /* 'background-size: cover' ensures the image always covers the slide area */
-    /* 'background-position: center' keeps the image centered */
-    background-size: cover;
+
+    /* BADLAAV 2: 'cover' ko 'contain' kiya gaya */
+    /* 'cover' image ko crop karta hai, 'contain' poori image dikhata hai */
+    background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; /* 'contain' ke liye yeh zaroori hai */
     
     display: flex;
     align-items: center;
@@ -251,6 +222,13 @@ body.dark-mode .theme-toggle-btn .fa-moon {
 .home-content {
     max-width: 800px;
     padding: 0 1rem;
+    
+    /* BADLAAV 3: Text ke peeche overlay add kiya gaya */
+    /* Taki text image ke upar saaf padha ja sake */
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    z-index: 5; /* Ensure text is above image */
 }
 
 .home-content h1 {
@@ -265,7 +243,7 @@ body.dark-mode .theme-toggle-btn .fa-moon {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Slider Controls */
+/* (Slider controls ke styles wैसे hi rahenge) */
 .slider-controls {
     position: absolute;
     bottom: 30px;
@@ -276,7 +254,6 @@ body.dark-mode .theme-toggle-btn .fa-moon {
     align-items: center;
     z-index: 10;
 }
-
 .prev-btn, .next-btn {
     background-color: rgba(255, 255, 255, 0.3);
     color: var(--white);
@@ -291,16 +268,13 @@ body.dark-mode .theme-toggle-btn .fa-moon {
     transition: background-color 0.3s ease;
     margin: 0 15px;
 }
-
 .prev-btn:hover, .next-btn:hover {
     background-color: var(--primary-color);
 }
-
 .slider-dots {
     display: flex;
     gap: 10px;
 }
-
 .dot {
     width: 12px;
     height: 12px;
@@ -309,52 +283,47 @@ body.dark-mode .theme-toggle-btn .fa-moon {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .dot.active {
     background-color: var(--primary-color);
     transform: scale(1.2);
 }
 
-/* ===== ABOUT SECTION ===== */
+/* ===== ABOUT, GALLERY, YOUTUBE, DONATE, CONTACT, FOOTER SECTIONS ===== */
+/* (In sabhi sections ke styles wैसे hi rahenge jaise pichli baar diye gaye the) */
+
+/* ... (About styles) ... */
 .about-section {
-    background-color: var(--bg-light); /* Use theme bg-light */
+    background-color: var(--bg-light);
     padding: 5rem 0;
     transition: background-color 0.3s ease;
 }
-
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
 }
-
 .mission-vision {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-
 .mission h3, .vision h3, .objectives h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
 }
-
 .objectives ul {
     list-style-position: inside;
     margin-left: 1rem;
 }
-
 .founders-gallery h3 {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
 }
-
 .founders {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }
-
 .founder-img {
     width: 150px;
     height: 150px;
@@ -363,56 +332,44 @@ body.dark-mode .theme-toggle-btn .fa-moon {
     margin: 0 auto 1rem;
     border: 4px solid var(--primary-color);
 }
-
 .founder-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .founder h4 {
-    color: var(--text-dark); /* Use theme text-dark */
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
 }
 
-/* ===== SOCIAL WORK / PROJECTS (DEPRECATED, using Gallery) ===== */
-/* Note: Original CSS had .social-work-section and .project-card. */
-/* We are using .gallery-section as per the HTML. */
-
-
-/* ===== YOUTUBE VIDEO SECTION ===== */
+/* ... (YouTube styles) ... */
 .youtube-section {
     padding: 50px 0; 
     background: var(--bg-light); 
     text-align: center;
     transition: background-color 0.3s ease;
 }
-
 .video-carousel-wrapper {
   position: relative;
-  overflow-x: auto; /* Allows horizontal scrolling */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  padding-bottom: 10px; /* Space for scrollbar */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
   width: 90%; 
   margin: 0 auto;
 }
-
 .video-carousel {
   display: flex;
-  flex-wrap: nowrap; /* Ensures videos stay in one line */
+  flex-wrap: nowrap;
   gap: 20px;
 }
-
 .video-carousel img {
   flex: 0 0 auto;
-  width: 300px; /* Fixed width for each video thumbnail */
+  width: 300px;
   height: 170px;
   border-radius: 8px;
   cursor: pointer;
-  object-fit: cover; /* Ensures image covers the area */
+  object-fit: cover;
 }
-
-/* Optional: Style the scrollbar for desktop */
 .video-carousel-wrapper::-webkit-scrollbar {
   height: 8px;
 }
@@ -430,13 +387,10 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-track {
 body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
   background: #555;
 }
-
-/* YouTube Subscribe Button */
 .youtube-subscribe {
     text-align: center;
     margin-top: 2rem;
 }
-
 .youtube-subscribe-btn {
     display: inline-block;
     background-color: var(--youtube-red);
@@ -449,17 +403,13 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     box-shadow: var(--shadow);
     font-size: 1.1rem;
 }
-
 .youtube-subscribe-btn i {
     margin-right: 8px;
 }
-
 .youtube-subscribe-btn:hover {
     background-color: #CC0000;
     transform: translateY(-3px);
 }
-
-/* YouTube Popup */
 .video-popup {
     display: none; 
     position:fixed; 
@@ -486,19 +436,16 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     cursor:pointer;
 }
 
-
-/* ===== GALLERY SECTION ===== */
+/* ... (Gallery styles) ... */
 .gallery-section {
     padding: 5rem 0;
 }
-
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
 }
-
 .gallery-item {
     position: relative;
     height: 250px;
@@ -508,14 +455,12 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
-
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
-
 .gallery-overlay {
     position: absolute;
     bottom: 0;
@@ -527,30 +472,23 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     transform: translateY(100%);
     transition: transform 0.3s ease;
 }
-
 .gallery-item:hover {
     transform: translateY(-5px);
 }
-
 .gallery-item:hover img {
     transform: scale(1.1);
 }
-
 .gallery-item:hover .gallery-overlay {
     transform: translateY(0);
 }
-
 .gallery-overlay h3 {
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
 }
-
 .gallery-overlay p {
     font-size: 0.9rem;
     opacity: 0.9;
 }
-
-/* Gallery Modal (Popup) */
 .gallery-modal {
     display: none;
     position: fixed;
@@ -563,7 +501,6 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.9);
 }
-
 .modal-content {
     margin: auto;
     display: block;
@@ -572,7 +509,6 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     max-height: 80vh;
     object-fit: contain;
 }
-
 .modal-caption {
     margin: auto;
     display: block;
@@ -583,7 +519,6 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     padding: 10px 0;
     height: 150px;
 }
-
 .close-modal {
     position: absolute;
     top: 15px;
@@ -594,7 +529,6 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .close-modal:hover,
 .close-modal:focus {
     color: var(--primary-color);
@@ -602,14 +536,13 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-/* ===== DONATION SECTION ===== */
+/* ... (Donation styles) ... */
 .donation-section {
-    background-color: var(--bg-light); /* Use theme bg-light */
+    background-color: var(--bg-light);
     padding: 5rem 0;
     text-align: center;
     transition: background-color 0.3s ease;
 }
-
 .donation-content {
     display: flex;
     justify-content: space-around;
@@ -618,20 +551,16 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     flex-wrap: wrap;
     gap: 2rem;
 }
-
 .payment-info h3 {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
 }
-
 .bank-details {
     list-style: none;
 }
-
 .bank-details li {
     margin-bottom: 0.8rem;
 }
-
 .qr-code img {
     width: 200px;
     height: 200px;
@@ -639,13 +568,11 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     border: 2px solid var(--primary-color);
     padding: 0.5rem;
     border-radius: 10px;
-    background-color: #fff; /* QR code bg ko hamesha white rakhein */
+    background-color: #fff;
 }
-
 .animate-scroll {
     animation: bounce 2s infinite;
 }
-
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -658,46 +585,40 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     }
 }
 
-/* ===== CONTACT SECTION ===== */
+/* ... (Contact styles) ... */
 .contact-section {
     padding: 5rem 0;
 }
-
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
 }
-
 .form-group {
     margin-bottom: 1.5rem;
 }
-
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--text-dark); /* Use theme text-dark */
+    color: var(--text-dark);
     font-weight: 500;
 }
-
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 0.8rem;
-    border: 1px solid var(--border-color); /* Use theme border */
-    background-color: var(--bg-color); /* Use theme bg */
-    color: var(--text-color); /* Use theme text */
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
-
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
 }
-
 .submit-btn {
     background-color: var(--primary-color);
     color: var(--white);
@@ -710,37 +631,31 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     box-shadow: var(--shadow);
     font-family: 'Poppins', sans-serif;
 }
-
 .submit-btn:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
 }
-
 .contact-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1.5rem;
 }
-
 .info-item {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
 }
-
 .info-item i {
     color: var(--primary-color);
     font-size: 1.5rem;
     margin-top: 0.2rem;
 }
-
 .social-links {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
 }
-
 .social-icon {
     display: flex;
     align-items: center;
@@ -753,81 +668,68 @@ body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
     text-decoration: none;
     transition: all 0.3s ease;
 }
-
 .social-icon:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
 }
 
-/* ===== FOOTER ===== */
+/* ... (Footer styles) ... */
 footer {
-    background-color: var(--dark-color); /* Use brand dark green */
-    color: var(--white); /* Text hamesha white */
+    background-color: var(--dark-color);
+    color: var(--white);
     padding: 3rem 0 1rem;
 }
-
 .footer-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 2rem;
 }
-
 .footer-logo h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
-
 .footer-logo p {
     color: var(--bg-light);
     font-size: 0.9rem;
 }
-
 .footer-links h3, .footer-newsletter h3 {
     color: var(--white);
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
-
 .footer-links ul {
     list-style: none;
 }
-
 .footer-links ul li {
     margin-bottom: 0.5rem;
 }
-
 .footer-links ul li a {
     color: var(--bg-light);
     text-decoration: none;
     transition: color 0.3s ease;
 }
-
 .footer-links ul li a:hover {
     color: var(--accent-color);
 }
-
 .footer-newsletter p {
     color: var(--bg-light);
     margin-bottom: 1rem;
     font-size: 0.9rem;
 }
-
 .newsletter-form {
     display: flex;
     max-width: 300px;
 }
-
 .newsletter-form input {
     flex: 1;
     padding: 0.8rem;
     border: none;
     border-radius: 4px 0 0 4px;
     outline: none;
-    color: #333; /* Input text hamesha dark */
+    color: #333;
 }
-
 .newsletter-form .btn {
     background-color: var(--primary-color);
     color: var(--white);
@@ -837,24 +739,21 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .newsletter-form .btn:hover {
     background-color: var(--secondary-color);
 }
-
 .footer-bottom {
     text-align: center;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .footer-bottom p {
     font-size: 0.9rem;
     color: var(--bg-light);
 }
 
 
-/* ===== RESPONSIVE DESIGN (Media Queries) ===== */
+/* ===== RESPONSIVE DESIGN (Media Queries) - UPDATED ===== */
 
 /* --- Tablet (max-width: 992px) --- */
 @media screen and (max-width: 992px) {
@@ -881,43 +780,40 @@ footer {
     /* Mobile Navigation */
     .nav-links {
         position: fixed;
-        top: 70px; /* Header height */
+        top: 70px;
         left: -100%;
         flex-direction: column;
-        background-color: var(--card-bg); /* Use theme card bg */
+        background-color: var(--card-bg);
         width: 100%;
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
         padding: 2rem 0;
     }
-    
     .nav-links.active {
         left: 0;
     }
-    
     .nav-links li {
         margin: 1.5rem 0;
     }
-    
     .hamburger {
         display: block;
     }
-    
-    /* Hamburger "X" animation */
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
-    
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-    
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
     
-    /* Other sections on mobile */
+    /* BADLAAV 4: Mobile par slider ki height kam kar di gayi hai */
+    .home-section {
+        height: 70vh; /* 100vh ki jagah 70vh */
+    }
+    
     .founders {
         grid-template-columns: 1fr;
     }
@@ -925,9 +821,12 @@ footer {
     .home-content h1 {
         font-size: 2.5rem;
     }
-    
     .home-content p {
         font-size: 1rem;
+    }
+    .home-content {
+        padding: 1.5rem; /* Padding kam ki gayi */
+        width: 90%; /* Mobile par content box thoda choda */
     }
     
     .section-title {
@@ -955,6 +854,12 @@ footer {
 
 /* --- Small Mobile (max-width: 576px) --- */
 @media screen and (max-width: 576px) {
+    
+    /* BADLAAV 4 (Continued): Chhote mobile par height aur kam ki gayi */
+    .home-section {
+        height: 50vh; /* 70vh ki jagah 50vh */
+    }
+
     .donation-content {
         flex-direction: column;
     }

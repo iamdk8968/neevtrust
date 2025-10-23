@@ -1,14 +1,32 @@
-/* Global Styles */
+/* ===== GLOBAL STYLES & COLOR VARIABLES ===== */
 :root {
+    /* Brand Colors */
     --primary-color: #4CAF50;
     --secondary-color: #388E3C;
     --accent-color: #8BC34A;
-    --light-color: #F1F8E9;
-    --dark-color: #1B5E20;
+    --dark-color: #1B5E20; /* Brand dark green */
     --white: #ffffff;
-    --gray: #f5f5f5;
-    --dark-gray: #333333;
+    --youtube-red: #FF0000;
+
+    /* --- Light Mode (Default) --- */
+    --bg-color: #ffffff;            /* Page background */
+    --bg-light: #F1F8E9;         /* Light sections background (About, Donate) */
+    --text-color: #333333;          /* Main text color */
+    --text-dark: #1B5E20;           /* Titles and dark text */
+    --card-bg: #ffffff;             /* Card background (mission, founder, form) */
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-color: #ddd;
+}
+
+body.dark-mode {
+    /* --- Dark Mode --- */
+    --bg-color: #121212;            /* Dark page background */
+    --bg-light: #1e1e1e;         /* Dark sections background */
+    --text-color: #f5f5f5;          /* Main text color */
+    --text-dark: #F1F8E9;           /* Titles and light text */
+    --card-bg: #2a2a2a;             /* Card background */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --border-color: #444;
 }
 
 * {
@@ -24,8 +42,10 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: var(--dark-gray);
-    background-color: var(--white);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    /* Smooth transition for theme change */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -37,7 +57,7 @@ body {
 
 .section-title {
     text-align: center;
-    color: var(--dark-color);
+    color: var(--text-dark);
     margin-bottom: 2rem;
     font-size: 2.5rem;
     position: relative;
@@ -56,7 +76,17 @@ body {
     border-radius: 2px;
 }
 
-/* Button Styles */
+/* Card style (About, Founder, etc.) */
+.card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* ===== BUTTONS ===== */
 .cta-button {
     display: inline-block;
     background-color: var(--primary-color);
@@ -77,15 +107,16 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Header and Navigation */
+/* ===== HEADER & NAVIGATION ===== */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--card-bg); /* Use card bg for header */
     box-shadow: var(--shadow);
     z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar {
@@ -112,7 +143,7 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--dark-gray);
+    color: var(--text-color); /* Use theme text color */
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -121,6 +152,39 @@ header {
     color: var(--primary-color);
 }
 
+/* Nav controls (Toggle + Hamburger) */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* --- Dark/Light Mode Toggle Button --- */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+}
+.theme-toggle-btn .fa-sun {
+    display: none; /* Initially hide sun */
+}
+.theme-toggle-btn .fa-moon {
+    display: inline-block; /* Initially show moon */
+}
+/* Show sun icon in dark mode */
+body.dark-mode .theme-toggle-btn .fa-sun {
+    display: inline-block;
+}
+body.dark-mode .theme-toggle-btn .fa-moon {
+    display: none;
+}
+
+
+/* --- Hamburger Menu --- */
 .hamburger {
     display: none;
     cursor: pointer;
@@ -129,12 +193,12 @@ header {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: var(--dark-gray);
+    background-color: var(--text-color); /* Use theme text color */
     margin: 5px 0;
     transition: all 0.3s ease;
 }
 
-/* Home Section */
+/* ===== HOME SECTION (SLIDER) ===== */
 .home-section {
     height: 100vh;
     position: relative;
@@ -142,7 +206,6 @@ header {
     color: var(--white);
 }
 
-/* Slider Styles */
 .slider-container {
     width: 100%;
     height: 100%;
@@ -163,9 +226,14 @@ header {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: overlay;
+    
+    /* --- SLIDER RESPONSIVENESS FIX --- */
+    /* 'background-size: cover' ensures the image always covers the slide area */
+    /* 'background-position: center' keeps the image centered */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,9 +242,6 @@ header {
     transition: opacity 1s ease;
     z-index: 1;
 }
-
-
-
 
 .slide.active {
     opacity: 1;
@@ -250,10 +315,11 @@ header {
     transform: scale(1.2);
 }
 
-/* About Section */
+/* ===== ABOUT SECTION ===== */
 .about-section {
-    background-color: var(--light-color);
+    background-color: var(--bg-light); /* Use theme bg-light */
     padding: 5rem 0;
+    transition: background-color 0.3s ease;
 }
 
 .about-content {
@@ -266,13 +332,6 @@ header {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-
-.mission, .vision, .objectives {
-    background-color: var(--white);
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
 }
 
 .mission h3, .vision h3, .objectives h3 {
@@ -296,14 +355,6 @@ header {
     gap: 2rem;
 }
 
-.founder {
-    background-color: var(--white);
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    text-align: center;
-}
-
 .founder-img {
     width: 150px;
     height: 150px;
@@ -320,104 +371,67 @@ header {
 }
 
 .founder h4 {
-    color: var(--dark-color);
+    color: var(--text-dark); /* Use theme text-dark */
     margin-bottom: 0.5rem;
 }
 
-/* Social Work Section */
-.social-work-section {
-    padding: 5rem 0;
+/* ===== SOCIAL WORK / PROJECTS (DEPRECATED, using Gallery) ===== */
+/* Note: Original CSS had .social-work-section and .project-card. */
+/* We are using .gallery-section as per the HTML. */
+
+
+/* ===== YOUTUBE VIDEO SECTION ===== */
+.youtube-section {
+    padding: 50px 0; 
+    background: var(--bg-light); 
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    height: 250px;
-    transition: transform 0.3s ease;
-}
-
-.project-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.project-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: var(--white);
-    padding: 1.5rem;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.project-card:hover img {
-    transform: scale(1.1);
-}
-
-.project-card:hover .project-info {
-    transform: translateY(0);
-}
-
-.project-info h3 {
-    margin-bottom: 0.5rem;
-}
-
-/* YouTube Video Section */
 .video-carousel-wrapper {
   position: relative;
+  overflow-x: auto; /* Allows horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  padding-bottom: 10px; /* Space for scrollbar */
+  width: 90%; 
+  margin: 0 auto;
 }
+
 .video-carousel {
   display: flex;
+  flex-wrap: nowrap; /* Ensures videos stay in one line */
   gap: 20px;
-  animation: scroll 30s linear infinite;
 }
+
 .video-carousel img {
   flex: 0 0 auto;
-  width: 300px;
+  width: 300px; /* Fixed width for each video thumbnail */
   height: 170px;
   border-radius: 8px;
   cursor: pointer;
+  object-fit: cover; /* Ensures image covers the area */
 }
 
-/* Smooth Auto Scroll */
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* Optional: Style the scrollbar for desktop */
+.video-carousel-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+.video-carousel-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-track {
+  background: #333;
+}
+.video-carousel-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+body.dark-mode .video-carousel-wrapper::-webkit-scrollbar-thumb {
+  background: #555;
 }
 
-/* Pause on Hover */
-.video-carousel-wrapper:hover .video-carousel {
-  animation-play-state: paused;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .video-carousel img {
-    width: 90%;
-    height: 200px;
-  }
-  .video-carousel {
-    gap: 15px;
-  }
-}
-/* subscribe */
+/* YouTube Subscribe Button */
 .youtube-subscribe {
     text-align: center;
     margin-top: 2rem;
@@ -425,7 +439,7 @@ header {
 
 .youtube-subscribe-btn {
     display: inline-block;
-    background-color: #FF0000;
+    background-color: var(--youtube-red);
     color: var(--white);
     padding: 12px 30px;
     border-radius: 30px;
@@ -443,16 +457,37 @@ header {
 .youtube-subscribe-btn:hover {
     background-color: #CC0000;
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 768px) {
-    .video-slide iframe {
-        height: 250px;
-    }
+/* YouTube Popup */
+.video-popup {
+    display: none; 
+    position:fixed; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100%; 
+    background:rgba(0,0,0,0.8); 
+    justify-content:center; 
+    align-items:center; 
+    z-index:9999;
+}
+.video-popup-content {
+    position:relative; 
+    width:80%; 
+    max-width:800px;
+}
+.close-popup {
+    position:absolute; 
+    top:-20px; 
+    right:-20px; 
+    font-size:30px; 
+    color:#fff; 
+    cursor:pointer;
 }
 
-/* Gallery Section */
+
+/* ===== GALLERY SECTION ===== */
 .gallery-section {
     padding: 5rem 0;
 }
@@ -515,7 +550,7 @@ header {
     opacity: 0.9;
 }
 
-/* Gallery Modal */
+/* Gallery Modal (Popup) */
 .gallery-modal {
     display: none;
     position: fixed;
@@ -562,27 +597,17 @@ header {
 
 .close-modal:hover,
 .close-modal:focus {
-    color: #bbb;
-    text-decoration: none;
-}
-
-.close-modal:hover,
-.close-modal:focus {
-    color: var(--primary-color);
-    text-decoration: none;
-    cursor: pointer;
-}
-.close-modal:focus {
     color: var(--primary-color);
     text-decoration: none;
     cursor: pointer;
 }
 
-/* Donation Section */
+/* ===== DONATION SECTION ===== */
 .donation-section {
-    background-color: var(--light-color);
+    background-color: var(--bg-light); /* Use theme bg-light */
     padding: 5rem 0;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .donation-content {
@@ -592,17 +617,6 @@ header {
     margin-bottom: 3rem;
     flex-wrap: wrap;
     gap: 2rem;
-}
-
-.payment-info, .qr-code {
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
-.payment-info {
-    text-align: left;
 }
 
 .payment-info h3 {
@@ -625,6 +639,7 @@ header {
     border: 2px solid var(--primary-color);
     padding: 0.5rem;
     border-radius: 10px;
+    background-color: #fff; /* QR code bg ko hamesha white rakhein */
 }
 
 .animate-scroll {
@@ -643,7 +658,7 @@ header {
     }
 }
 
-/* Contact Section */
+/* ===== CONTACT SECTION ===== */
 .contact-section {
     padding: 5rem 0;
 }
@@ -654,13 +669,6 @@ header {
     gap: 3rem;
 }
 
-.contact-form {
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -668,7 +676,7 @@ header {
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--dark-color);
+    color: var(--text-dark); /* Use theme text-dark */
     font-weight: 500;
 }
 
@@ -676,10 +684,12 @@ header {
 .form-group textarea {
     width: 100%;
     padding: 0.8rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color); /* Use theme border */
+    background-color: var(--bg-color); /* Use theme bg */
+    color: var(--text-color); /* Use theme text */
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .form-group input:focus,
@@ -704,7 +714,6 @@ header {
 .submit-btn:hover {
     background-color: var(--secondary-color);
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .contact-info {
@@ -750,10 +759,10 @@ header {
     transform: translateY(-3px);
 }
 
-/* Footer */
+/* ===== FOOTER ===== */
 footer {
-    background-color: var(--dark-color);
-    color: var(--white);
+    background-color: var(--dark-color); /* Use brand dark green */
+    color: var(--white); /* Text hamesha white */
     padding: 3rem 0 1rem;
 }
 
@@ -771,12 +780,8 @@ footer {
 }
 
 .footer-logo p {
-    color: var(--light-color);
+    color: var(--bg-light);
     font-size: 0.9rem;
-}
-
-.footer-links {
-    margin: 1rem 0;
 }
 
 .footer-links h3, .footer-newsletter h3 {
@@ -794,7 +799,7 @@ footer {
 }
 
 .footer-links ul li a {
-    color: var(--light-color);
+    color: var(--bg-light);
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -803,12 +808,8 @@ footer {
     color: var(--accent-color);
 }
 
-.footer-newsletter {
-    margin: 1rem 0;
-}
-
 .footer-newsletter p {
-    color: var(--light-color);
+    color: var(--bg-light);
     margin-bottom: 1rem;
     font-size: 0.9rem;
 }
@@ -824,6 +825,7 @@ footer {
     border: none;
     border-radius: 4px 0 0 4px;
     outline: none;
+    color: #333; /* Input text hamesha dark */
 }
 
 .newsletter-form .btn {
@@ -848,30 +850,13 @@ footer {
 
 .footer-bottom p {
     font-size: 0.9rem;
-    color: var(--light-color);
+    color: var(--bg-light);
 }
 
-/* Responsive Footer */
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-logo, .footer-links, .footer-newsletter {
-        margin-bottom: 2rem;
-    }
-    
-    .newsletter-form {
-        margin: 0 auto;
-    }
-}
 
-.tagline {
-    font-style: italic;
-}
+/* ===== RESPONSIVE DESIGN (Media Queries) ===== */
 
-/* Responsive Design */
+/* --- Tablet (max-width: 992px) --- */
 @media screen and (max-width: 992px) {
     .about-content,
     .contact-content {
@@ -891,13 +876,15 @@ footer {
     }
 }
 
+/* --- Mobile (max-width: 768px) --- */
 @media screen and (max-width: 768px) {
+    /* Mobile Navigation */
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 70px; /* Header height */
         left: -100%;
         flex-direction: column;
-        background-color: var(--white);
+        background-color: var(--card-bg); /* Use theme card bg */
         width: 100%;
         text-align: center;
         transition: 0.3s;
@@ -917,6 +904,7 @@ footer {
         display: block;
     }
     
+    /* Hamburger "X" animation */
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
@@ -929,12 +917,9 @@ footer {
         transform: translateY(-8px) rotate(-45deg);
     }
     
+    /* Other sections on mobile */
     .founders {
         grid-template-columns: 1fr;
-    }
-    
-    .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
     
     .home-content h1 {
@@ -948,8 +933,27 @@ footer {
     .section-title {
         font-size: 2rem;
     }
+
+    .video-carousel img {
+        width: 250px;
+        height: 140px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-logo, .footer-links, .footer-newsletter {
+        margin-bottom: 2rem;
+    }
+    
+    .newsletter-form {
+        margin: 0 auto;
+    }
 }
 
+/* --- Small Mobile (max-width: 576px) --- */
 @media screen and (max-width: 576px) {
     .donation-content {
         flex-direction: column;
@@ -958,11 +962,7 @@ footer {
     .payment-info, .qr-code {
         width: 100%;
     }
-    
-    .project-card {
-        height: 200px;
-    }
-    
+        
     .home-content h1 {
         font-size: 2rem;
     }
